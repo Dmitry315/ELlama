@@ -31,14 +31,19 @@ trainer: !HFQwenTrainer
     warmup_ratio: 0.03
     group_by_length: False
     lr_scheduler_type: "cosine"
-    eval_strategy: "no"
+    eval_strategy: "steps"
+    eval_steps: 1000
     max_length: 2048
     resume_from_checkpoint: &checkpoint False
     completion_only_loss: False
     assistant_only_loss: False
+    report_to: ["tensorboard"]
+    logging_dir: "src/experiments/runs/0.2B"
     seed: 42
   train_dataset: !get_pretrain_data
     data_path: "src/experiments/data/fineweb2/train.jsonl"
+  val_dataset: !get_pretrain_data
+    data_path: "src/experiments/data/fineweb2_medium/val.jsonl"
   save_path: "src/experiments/models/qwen_soft_pretrain"
   add_size_to_name: True
   resume_from_checkpoint: *checkpoint
