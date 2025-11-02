@@ -1,4 +1,5 @@
 from nip import nip
+import torch
 
 from trl import SFTTrainer, SFTConfig
 from transformers import PreTrainedTokenizerFast, Qwen2ForCausalLM, Qwen2Config
@@ -10,15 +11,18 @@ class HFQwenTrainer:
                  tokenizer_path, 
                  trainer_config_params, 
                  train_dataset, 
+                 val_dataset,
                  save_path, 
                  resume_from_checkpoint=False,
                  add_size_to_name=True,
                  tokenizer_truncation_side="right",
                  tokenizer_padding_side="left",
                  use_accelerate=True,
+                 validation_callback_params=dict(),
                  *args, **kwargs
                  ):
         self.train_dataset = train_dataset
+        self.val_dataset = val_dataset
         self.tokenizer = PreTrainedTokenizerFast.from_pretrained(tokenizer_path)
         self.tokenizer.padding_side = tokenizer_padding_side
         self.tokenizer.truncation_side = tokenizer_truncation_side
@@ -57,11 +61,15 @@ class HFQwenTrainer:
 
         self.use_accelerate = use_accelerate
 
+        callbacks = []
+
         self.trainer = SFTTrainer(
             model=self.model,
             processing_class=self.tokenizer,
             train_dataset=self.train_dataset,
-            args=self.train_config
+            eval_dataset=self.val_dataset,
+            args=self.train_config,
+            callbacks=callbacks
         )
 
     def train(self):
