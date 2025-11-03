@@ -1,23 +1,37 @@
 import argparse
 import os
+import logging
 import yaml
 import numpy
 import torch
 import random
+import torch.distributed as dist
 from nip import load, wrap_module
 from dotenv import load_dotenv
+from utils import set_random_seed
 
 from models.hf_model_trainer import HFQwenTrainer
 from datasets_loading.pretrain_data import get_pretrain_data
+logger = logging.getLogger(__name__)
 
 load_dotenv()
 
-def train_model_from_config(config):
+def train_model_from_config(config_path, config):
+    current_rank = dist.get_rank()
+    logging.basicConfig(filename=f'run_model_train_rank_{current_rank}.log',
+                        format='%(asctime)s - %(levelname)s - %(message)s',
+                        level=logging.INFO,
+                        datefmt='%Y-%m-%d %H:%M:%S')
+    
+    logger.info("load_config from ", config_path)
+    
+    set_random_seed(config["seed"])
     model_trainer = config["trainer"]
-    print("Start train")
+    logger.info("Start train")
     model_trainer.train()
-    print("Save model")
+    logger.info("Start saving model")
     model_trainer.save()
+    logger.info("Saved")
 
 
 if __name__ == "__main__":
@@ -28,7 +42,4 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     config = load(args.config)
-    print("================CONFIG================")
-    print(config)
-    print("======================================")
-    train_model_from_config(config)
+    train_model_from_config(args.config, config)
