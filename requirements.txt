@@ -10,3 +10,4 @@ tensorboard
 nip-config
 python-dotenv
 tiktoken
+pytest

@@ -40,7 +40,7 @@ trainer: !HFQwenTrainer
     eval_strategy: "steps"
     eval_steps: 1000
     max_length: 4096
-    resume_from_checkpoint: &checkpoint "src/experiments/results0.2B/checkpoint-8400"
+    resume_from_checkpoint: &checkpoint False
     completion_only_loss: False
     assistant_only_loss: False
     report_to: ["tensorboard"]

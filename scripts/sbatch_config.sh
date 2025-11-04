@@ -3,7 +3,7 @@
 #SBATCH --cpus-per-task=128
 #SBATCH --gpus=16
 #SBATCH --output=test-slurm.out
-#SBATCH --mem=2048000
+#SBATCH --mem=512000
 #SBATCH --exclude=cn[8]
 
 export GPUS_PER_NODE=8
