@@ -8,8 +8,8 @@ from nip import load, wrap_module
 from dotenv import load_dotenv
 from utils import set_random_seed
 
-from models.hf_model_trainer import HFQwenTrainer
-from datasets_loading.pretrain_data import get_pretrain_data
+from .models.hf_model_trainer import HFQwenTrainer
+from .datasets_loading.pretrain_data import get_pretrain_data
 
 load_dotenv()
 

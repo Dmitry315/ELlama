@@ -8,7 +8,7 @@ from nip import load, wrap_module
 from dotenv import load_dotenv
 from .utils import set_random_seed
 
-from models.hf_bpe_tokenizer import HFBPETokenizerTrainer
+from .models.hf_bpe_tokenizer import HFBPETokenizerTrainer
 
 load_dotenv()
 
