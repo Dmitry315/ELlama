@@ -10,6 +10,31 @@ def load_safetensors_model_simple(model_path):
     tokenizer = PreTrainedTokenizerFast.from_pretrained(model_path, trust_remote_code=True)
     return model, tokenizer
 
+def get_model_prediction(model, tokenizer, text, top_p, temperature):
+    with torch.no_grad():
+        inputs = tokenizer(
+            text, 
+            return_tensors="pt", 
+            padding=True, 
+            truncation=True, 
+            max_length=128
+        ).to(device)
+        print("==[TOKENIZED]==")
+        outputs = model.generate(
+            inputs.input_ids,
+            max_length=128,
+            temperature=temperature,
+            top_p=top_p,
+            do_sample=True,
+            pad_token_id=tokenizer.eos_token_id,
+            num_return_sequences=1
+        )
+        print("==[GENERATED]==")
+        generated_text = tokenizer.decode(
+            outputs[0], 
+            skip_special_tokens=True
+        )
+    return generated_text
 
 if __name__ == "__main__":
     logging.basicConfig(filename='run_inference_cmd.log',
@@ -39,29 +64,7 @@ if __name__ == "__main__":
 
     text = input("User:")
     
-    with torch.no_grad():
-        inputs = tokenizer(
-            text, 
-            return_tensors="pt", 
-            padding=True, 
-            truncation=True, 
-            max_length=128
-        ).to(device)
-        print("==[TOKENIZED]==")
-        outputs = model.generate(
-            inputs.input_ids,
-            max_length=128,
-            temperature=args.temperature,
-            top_p=args.top_p,
-            do_sample=True,
-            pad_token_id=tokenizer.eos_token_id,
-            num_return_sequences=1
-        )
-        print("==[GENERATED]==")
-        generated_text = tokenizer.decode(
-            outputs[0], 
-            skip_special_tokens=True
-        )
+    generated_text = get_model_prediction(model, tokenizer, text, args.top_p, args.temperature)
     
     print("Model: ", generated_text)
 

@@ -4,7 +4,7 @@ import subprocess
 from transformers import Qwen2ForCausalLM
 from data_process.prepare_fineweb import read_fine_web, save_txt
 from convert.fsdp_checkpoint_to_safetensors import convert_fsdp_to_checkpoint
-from inference.run_inference_cmd import load_safetensors_model_simple
+from inference.run_inference_cmd import load_safetensors_model_simple, get_model_prediction
 from training.train_tokenizer import train_tokenizer_from_config
 from training.models.hf_bpe_tokenizer import HFBPETokenizerTrainer
 
@@ -25,8 +25,10 @@ def test_download_fineweb():
 
 def load_model():
     model, tokenizer = load_safetensors_model_simple("dmitry315/ELlama1-0.7b")
+    text = "Πιστεύω ότι το νόημα της ζωής βρίσκεται στο"
     assert type(model) is Qwen2ForCausalLM
-    assert tokenizer("Πιστεύω ότι το νόημα της ζωής βρίσκεται στο")["input_ids"] == [12801, 4211, 4097, 9278, 4118, 5321, 5170, 4132]
+    assert tokenizer(text)["input_ids"] == [12801, 4211, 4097, 9278, 4118, 5321, 5170, 4132]
+
 
 def test_train_tokenizer():
     path = "tests/data/fineweb2_example/"
