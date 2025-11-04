@@ -22,11 +22,11 @@ def convert_fsdp_to_checkpoint(fsdp_checkpoint, output_model, tokenizer):
     logger.info('Started laoding Model')
     qwen_config = Qwen2Config(
         vocab_size=150000,
-        hidden_size=1024,
+        hidden_size=512,
         head_dim=128,
-        intermediate_size=3072,
-        num_hidden_layers=28,
-        max_window_layers=28,
+        intermediate_size=1536,
+        num_hidden_layers=14,
+        max_window_layers=14,
         num_attention_heads=16,
         num_key_value_heads=8,
         max_position_embeddings=4096,

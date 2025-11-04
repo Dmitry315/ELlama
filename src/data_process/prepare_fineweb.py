@@ -4,12 +4,11 @@ from datasets import load_dataset
 import pandas as pd
 logger = logging.getLogger(__name__)
 
-def read_fine_web(save_path="../experiments/data/fineweb2"):
+def read_fine_web(save_path="../experiments/data/fineweb2", dataset_name="dmitry315/fineweb2-modern-greece-sample"):
     logging.basicConfig(filename='prepare_fineweb_read_fine_web.log',
                         format='%(asctime)s - %(levelname)s - %(message)s',
                         level=logging.INFO,
                         datefmt='%Y-%m-%d %H:%M:%S')
-    dataset_name = "dmitry315/fineweb2-modern-greece-sample"
     logger.info('Start loading ' + dataset_name)
     ds = load_dataset(dataset_name)
     logger.info(dataset_name + " loaded. Start saving to jsonl: " + save_path)
