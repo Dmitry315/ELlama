@@ -2,9 +2,9 @@ import os
 import pytest
 import subprocess
 from transformers import Qwen2ForCausalLM
-from ellama.src.data_process.prepare_fineweb import read_fine_web, save_txt
-from ellama.src.convert.fsdp_checkpoint_to_safetensors import convert_fsdp_to_checkpoint
-from ellama.src.inference.run_inference_cmd import load_safetensors_model_simple
+from data_process.prepare_fineweb import read_fine_web, save_txt
+from convert.fsdp_checkpoint_to_safetensors import convert_fsdp_to_checkpoint
+from inference.run_inference_cmd import load_safetensors_model_simple
 
 @pytest.mark.slow
 def test_download_fineweb():
