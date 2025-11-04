@@ -36,3 +36,28 @@
 Нужно разработать бенчмарк, где оценка считается через перевод запроса и оценки перевода ответа (LLM as a judge).
 
 Быстрый инференс может осуществлятся через библиотеку vllm.
+
+# Quick start
+
+Делаем окружение с питоном 3.10 ставим requirements.txt
+```
+conda create --name ellama-learn python=3.10 --yes
+conda activate ellama-learn
+pip install -r requirements.txt
+pip install -e .
+```
+
+Скачиваем данные для обучения:
+```
+sh scripts/download_fineweb.sh
+```
+
+Запускаем обучение токенизатора:
+```
+sh scripts/run_tokenizer_train.sh
+```
+
+Запускаем обучение модели:
+```
+sh scripts/run_model_train.sh
+```

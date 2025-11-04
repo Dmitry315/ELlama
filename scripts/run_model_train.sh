@@ -1,1 +1,1 @@
-python src/training/train_model.py --config "src/configs/train_qwen_soft.nip"
+python -m src.training.train_model --config "src/configs/train_qwen_aggresive.nip"

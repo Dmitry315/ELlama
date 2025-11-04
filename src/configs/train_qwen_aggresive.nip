@@ -7,11 +7,11 @@ trainer: !HFQwenTrainer
     max_window_layers: 14
     num_attention_heads: 16
     num_key_value_heads: 8
-    max_position_embeddings: 4096
+    max_position_embeddings: 1024
     attention_dropout: 0.0
     hidden_act: "silu"
     attention_bias: False
-  tokenizer_path: "src/experiments/bpe_greek_tokenizer_medium"
+  tokenizer_path: "src/experiments/example/bpe_greek_tokenizer"
   tokenizer_truncation_side: "right"
   tokenizer_padding_side: "left"
   trainer_config_params:
@@ -39,7 +39,7 @@ trainer: !HFQwenTrainer
     lr_scheduler_type: "cosine"
     eval_strategy: "steps"
     eval_steps: 1000
-    max_length: 4096
+    max_length: 1024
     resume_from_checkpoint: &checkpoint False
     completion_only_loss: False
     assistant_only_loss: False
@@ -47,10 +47,11 @@ trainer: !HFQwenTrainer
     logging_dir: "src/experiments/runs/0.2B"
     seed: 42
   train_dataset: !get_pretrain_data
-    data_path: "src/experiments/data/fineweb2_medium/train.jsonl"
+    data_path: "src/experiments/example/data/fineweb2/train.jsonl"
   val_dataset: !get_pretrain_data
-    data_path: "src/experiments/data/fineweb2_medium/val.jsonl"
-  save_path: "src/experiments/models/qwen_medium_pretrain"
+    data_path: "src/experiments/example/data/fineweb2/val.jsonl"
+  save_path: "src/experiments/example/models/qwen_medium_pretrain"
   add_size_to_name: True
   resume_from_checkpoint: *checkpoint
+  use_accelerate: False
 seed: 42

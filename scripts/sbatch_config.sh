@@ -29,4 +29,4 @@ echo "$CMD"
 
 srun --container-image /scratch/d.melikhov/images/dmitry315_learn_env_6.sqsh --container-writable \
     --container-mounts /scratch/d.melikhov/gitlab_projects/ELlama/:/app/ \
-    --container-workdir /app bash -c "ls -la && ln -s /opt/conda/bin/python /usr/bin/python3 && pip install nip-config && $CMD" 1>stdout_full.log 2>stderr_full.log
+    --container-workdir /app bash -c "ls -la && ln -s /opt/conda/bin/python /usr/bin/python3 && pip install nip-config && pip install -e . && $CMD" 1>stdout_full.log 2>stderr_full.log
