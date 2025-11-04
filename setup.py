@@ -1,19 +1,14 @@
 from setuptools import setup, find_packages
 
 setup(
-    name="convert",
+    name="ellama",
     version="0.1.0",
-    packages=find_packages()
-)
-
-setup(
-    name="data_process",
-    version="0.1.0",
-    packages=find_packages()
-)
-
-setup(
-    name="inference",
-    version="0.1.0",
-    packages=find_packages()
+    packages=["convert", "data_process", "inference", "training"],
+    package_dir={
+        "": "src",                              # корневая директория
+        "convert": "src/convert",              # или можно указать явно
+        "data_process": "src/data_process",
+        "inference": "src/inference",
+        "training": "src/training"
+    }
 )
