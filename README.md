@@ -61,3 +61,8 @@ sh scripts/run_tokenizer_train.sh
 ```
 sh scripts/run_model_train.sh
 ```
+
+Если нужно модифицировать обучение:
+Все скрипты лежат в scripts/
+Конфиги обучения в src/configs/
+Обучение оригинальном модели было на кластере, поэтому там выставлялся max_length: 4096
