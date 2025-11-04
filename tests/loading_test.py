@@ -41,7 +41,7 @@ def test_train_tokenizer():
             "min_frequency": 1,
             "special_tokens": ["<|bos|>", "<|unk|>", "<|sep|>", "<|pad|>", "<|eos|>", "<|system|>", "<|user|>", "<|assistant|>"]
         },
-        "train_corpus_files": path + "/train.txt",
+        "train_corpus_files": [path + "/train.txt"],
         "save_path": "tests/bpe_tokenizer",
         "tokenizer_fast_params": {
             "padding_side": "left",
