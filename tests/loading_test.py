@@ -42,7 +42,7 @@ def test_train_tokenizer():
             "special_tokens": ["<|bos|>", "<|unk|>", "<|sep|>", "<|pad|>", "<|eos|>", "<|system|>", "<|user|>", "<|assistant|>"]
         },
         "train_corpus_files": [path + "/train.txt"],
-        "save_path": "tests/bpe_tokenizer",
+        "save_path": {"local_path": "tests/bpe_tokenizer"},
         "tokenizer_fast_params": {
             "padding_side": "left",
             "truncation_side": "left",
