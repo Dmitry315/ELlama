@@ -34,4 +34,4 @@ jobs:
       continue-on-error: true
 
     - name: Run tests
-        run: pytest --cov=src --cov-report=xml tests/
+      run: pytest --cov=src --cov-report=xml tests/
