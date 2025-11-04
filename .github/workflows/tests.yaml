@@ -30,7 +30,7 @@ jobs:
     - name: Run Ruff
       run: |
         pip install ruff
-        ruff src
+        ruff check src/
       continue-on-error: true
 
     - name: Run tests

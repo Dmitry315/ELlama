@@ -10,7 +10,7 @@ from inference.run_inference_cmd import load_safetensors_model_simple
 def test_download_fineweb():
     path = "tests/data/fineweb2_example/"
     os.makedirs(path, exist_ok=True)
-    read_fine_web(save_path=path)
+    read_fine_web(save_path=path, dataset_name="dmitry315/fineweb2-modern-greece-sample-test")
     assert os.path.exists(path + "/train.jsonl")
     assert os.path.exists(path + "/val.jsonl")
     save_txt(read_path=path + "/train.jsonl", save_path=path + "/train.txt")
