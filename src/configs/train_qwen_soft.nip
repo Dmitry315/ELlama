@@ -47,3 +47,4 @@ trainer: !HFQwenTrainer
   save_path: "src/experiments/models/qwen_soft_pretrain"
   add_size_to_name: True
   resume_from_checkpoint: *checkpoint
+seed: 42

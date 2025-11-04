@@ -23,6 +23,7 @@ class HFQwenTrainer:
                  ):
         self.train_dataset = train_dataset
         self.val_dataset = val_dataset
+        print('Load tokenizer')
         self.tokenizer = PreTrainedTokenizerFast.from_pretrained(tokenizer_path)
         self.tokenizer.padding_side = tokenizer_padding_side
         self.tokenizer.truncation_side = tokenizer_truncation_side
@@ -32,18 +33,20 @@ class HFQwenTrainer:
         print(f"eos_token: {self.tokenizer.eos_token}")
         print(f"eos_token_id: {self.tokenizer.eos_token_id}")
 
+        print('Load model')
         self.qwen_config = Qwen2Config(
             vocab_size= self.tokenizer.vocab_size,
             **qwen_params
         )
         self.model = Qwen2ForCausalLM(config=self.qwen_config)
+        print('Load config')
         self.train_config = SFTConfig(**trainer_config_params)
-        print(self.tokenizer)
-        print(self.train_dataset)
+        print(str(self.tokenizer))
+        print(str(self.train_dataset))
         self.resume_from_checkpoint = resume_from_checkpoint
         self.save_path = save_path
         total_params = sum(p.numel() for p in self.model.parameters())
-        print("params: ", total_params)
+        print("params:  {total_params}")
         end = ""
         if total_params >= 100_000_000:
             total_params /= 1_000_000_000
@@ -51,9 +54,7 @@ class HFQwenTrainer:
         elif total_params >= 100_000:
             total_params //= 1_000_000
             end = "M"
-        print("==================================")
         print(f"Total parameters: {total_params:.1f}"+end)
-        print("==================================")
         if add_size_to_name:
             self.save_path += f"{total_params:.1f}" + end
 
@@ -62,7 +63,7 @@ class HFQwenTrainer:
         self.use_accelerate = use_accelerate
 
         callbacks = []
-
+        print('Load trainer')
         self.trainer = SFTTrainer(
             model=self.model,
             processing_class=self.tokenizer,
@@ -73,11 +74,16 @@ class HFQwenTrainer:
         )
 
     def train(self):
+        print("Start train")
         self.trainer.train(resume_from_checkpoint=self.resume_from_checkpoint)
+        print("Model trained")
 
     def save(self):
         if self.use_accelerate:
+            print("Save fsdp model")
             self.trainer.accelerator.save_state(output_dir=self.save_path, safe_serialization=True)
         else:
+            print("Save safetensor model")
             self.model.save_pretrained(self.save_path)
             self.tokenizer.save_pretrained(self.save_path)
+        print("Model saved")

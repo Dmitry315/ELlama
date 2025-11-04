@@ -18,3 +18,4 @@ trainer: !HFBPETokenizerTrainer
     sep_token: "<|sep|>"
     pad_token: "<|pad|>"
     additional_special_tokens: ["<|system|>", "<|user|>", "<|assistant|>"]
+seed: 42

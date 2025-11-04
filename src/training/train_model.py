@@ -6,17 +6,17 @@ import torch
 import random
 from nip import load, wrap_module
 from dotenv import load_dotenv
+from utils import set_random_seed
 
 from models.hf_model_trainer import HFQwenTrainer
 from datasets_loading.pretrain_data import get_pretrain_data
 
 load_dotenv()
 
-def train_model_from_config(config):
+def train_model_from_config(config_path, config):
+    set_random_seed(config["seed"])
     model_trainer = config["trainer"]
-    print("Start train")
     model_trainer.train()
-    print("Save model")
     model_trainer.save()
 
 
@@ -28,7 +28,4 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     config = load(args.config)
-    print("================CONFIG================")
-    print(config)
-    print("======================================")
-    train_model_from_config(config)
+    train_model_from_config(args.config, config)
