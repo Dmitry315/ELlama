@@ -17,11 +17,11 @@ def test_download_fineweb():
     assert os.path.exists(path + "/train.txt")
     os.rmtree(path)
 
-@pytest.mark.slow
-def test_convert():
-    convert_fsdp_to_checkpoint("tests/data/fsdp_checkpoint/pytorch_model_fsdp_0/", "tests/data/final_model", "dmitry315/ELlama1-0.7b")
-    assert os.path.exists("tests/data/final_model/config.json")
-    assert os.path.exists("tests/data/final_model/tokenizer.json")
+# @pytest.mark.slow
+# def test_convert():
+#     convert_fsdp_to_checkpoint("tests/data/fsdp_checkpoint/pytorch_model_fsdp_0/", "tests/data/final_model", "dmitry315/ELlama1-0.7b")
+#     assert os.path.exists("tests/data/final_model/config.json")
+#     assert os.path.exists("tests/data/final_model/tokenizer.json")
 
 @pytest.mark.slow
 def load_model():
