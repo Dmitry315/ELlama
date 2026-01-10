@@ -13,4 +13,3 @@ tensorboard
 mlflow
 dagshub
 pytest 
-vllm==0.13.0
