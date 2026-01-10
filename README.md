@@ -105,3 +105,9 @@ curl -X POST http://localhost:8080/predictions/ellama \
   -H "Content-Type: application/json" \
   -d '{"data": "Θυμάμαι μια υπέροχη"}'
 ```
+
+# MLFlow
+
+Логи эксперимента лежат в DagsHub: https://dagshub.com/melikhov.dmitry.a/ellama-train/experiments
+
+Например: https://dagshub.com/melikhov.dmitry.a/ellama-train/experiments#/experiment/m_7978b647680e4765ac9ba4e0bd0be50f
