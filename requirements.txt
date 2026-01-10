@@ -17,3 +17,5 @@ pytest
 torchserve
 torch-model-archiver
 torch-workflow-archiver  
+vllm==0.13.0
+openai

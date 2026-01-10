@@ -64,9 +64,8 @@ sh scripts/run_model_train.sh
 
 # Serve
 
-## TorchServe
-
-Скачиваем модель локально:
+По умолчанию у претрен модели нет chat_template, поэтому для правильной работы добавляем просто конкатенацию.
+Скачиваем модель локально и добавляем шаблон:
 ```
 from transformers import AutoModelForCausalLM, AutoTokenizer
 
@@ -76,28 +75,45 @@ save_path = "data/model"
 tokenizer = AutoTokenizer.from_pretrained(model_name)
 model = AutoModelForCausalLM.from_pretrained(model_name)
 
+chat_template = """{% for message in messages %}{{ message['content'] }}{% endfor %}"""
+
+tokenizer.chat_template = chat_template
+
 tokenizer.save_pretrained(save_path)
 model.save_pretrained(save_path)
 ```
 
-Архивируем (`run_torch_archiver.sh`):
+## VLLM (просто + просто)
+
+Запускаем serve (`run_vllm_serve.sh`)
+
+Запросы к модели через OpenAI API:
+
 ```
-torch-model-archiver \
-  --model-name llm_text_generation \
-  --version 1.0 \
-  --handler llm_handler.py \
-  --extra-files "./data/model" \
-  --export-path model_store \
-  --force
+from openai import OpenAI
+
+client = OpenAI(
+    base_url="http://localhost:8000/v1",
+    api_key="kek"
+)
+
+response = client.chat.completions.create(
+    model="ellama",
+    messages=[
+        {"role": "user", "content": "Θυμάμαι μια υπέροχη"}
+    ],
+    temperature=0.7,
+    max_tokens=100
+)
+
+print(response.choices[0].message.content)
 ```
 
-Запускаем (`run_torchserve.sh`):
-```
-torchserve --start \
-  --model-store model_store \
-  --models ellama=llm_text_generation.mar \
-  --ncs
-```
+## TorchServe (тяжело + зачем?)
+
+Архивируем (`run_torch_archiver.sh`)
+
+Запускаем (`run_torchserve.sh`)
 
 Делаем запрос:
 ```
