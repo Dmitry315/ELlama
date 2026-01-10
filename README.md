@@ -111,6 +111,11 @@ print(response.choices[0].message.content)
 
 ## TorchServe (тяжело + зачем?)
 
+Install:
+```
+pip install torchserve torch-model-archiver torch-workflow-archiver 
+```
+
 Архивируем (`run_torch_archiver.sh`)
 
 Запускаем (`run_torchserve.sh`)

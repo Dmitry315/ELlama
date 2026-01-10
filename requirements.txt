@@ -12,8 +12,5 @@ dagshub
 tensorboard
 mlflow
 dagshub
-pytest
-torchserve
-torch-model-archiver
-torch-workflow-archiver  
+pytest 
 vllm==0.13.0
