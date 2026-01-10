@@ -1,0 +1,24 @@
+stages:
+  prepare:
+    cmd: python src/data_pprocess/prepare_fineweb.py --save-path ./data/fineweb --to-txt --save-path-txt ./data/fineweb/train.txt
+    outs:
+      - data/fineweb/train.jsonl
+      - data/fineweb/val.jsonl
+      - data/fineweb/train.txt
+  train_tokenizer:
+    cmd: python -m src.training.train_tokenizer --config src/configs/train_bpe.nip
+    deps:
+      - data/fineweb/train.txt
+    outs:
+      - data/bpe_greek_tokenizer
+  train_model:
+    cmd: python -m src.training.train_model --config src/configs/train_qwen_aggresive.nip
+    deps:
+      - data/fineweb/train.jsonl
+      - data/fineweb/val.jsonl
+      - data/bpe_greek_tokenizer
+    outs:
+      - data/qwen_medium_pretrain
+      - data/runs
+      - data/results
+    

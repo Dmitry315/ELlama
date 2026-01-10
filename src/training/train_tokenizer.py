@@ -20,7 +20,7 @@ def train_tokenizer_from_config(config_path, config):
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Train Llama-Guard for toxicity classification")
+    parser = argparse.ArgumentParser(description="Train Tokenizer")
     parser.add_argument("--config", type=str, default="src/configs/train_bpe.nip",
                         help="Path to config file (default: configs/train.nip")
     

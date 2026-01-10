@@ -21,8 +21,8 @@ def train_model_from_config(config_path, config):
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Train Llama-Guard for toxicity classification")
-    parser.add_argument("--config", type=str, default="src/configs/train_bpe.nip",
+    parser = argparse.ArgumentParser(description="Train LLM")
+    parser.add_argument("--config", type=str, default="src/configs/train_qwen_aggresive.nip",
                         help="Path to config file (default: configs/train.nip")
     
     args = parser.parse_args()

@@ -36,9 +36,9 @@ if __name__ == "__main__":
                         level=logging.INFO,
                         datefmt='%Y-%m-%d %H:%M:%S')
     parser = argparse.ArgumentParser(description="Download Fineweb2 Greek")
-    parser.add_argument("--save-path", type=str, default="../experiments/data/fineweb2/train.jsonl", help="Data save path")
+    parser.add_argument("--save-path", type=str, default="../experiments/data/fineweb", help="Data save path")
     parser.add_argument("--to-txt",action="store_true",help="Convert to txt")
-    parser.add_argument("--save-path-txt", type=str, default="../experiments/data/fineweb2/train.txt", help="Data save path")
+    parser.add_argument("--save-path-txt", type=str, default="../experiments/data/fineweb/train.txt", help="Data save path")
     args = parser.parse_args()
 
     logger.info('Parameters')
