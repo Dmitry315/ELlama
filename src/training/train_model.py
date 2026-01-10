@@ -4,6 +4,7 @@ import yaml
 import numpy
 import torch
 import random
+import dagshub
 from nip import load, wrap_module
 from dotenv import load_dotenv
 from .utils import set_random_seed
@@ -11,7 +12,12 @@ from .utils import set_random_seed
 from .models.hf_model_trainer import HFQwenTrainer
 from .datasets_loading.pretrain_data import get_pretrain_data
 
+REPO_NAME = 'ellama-train'
+USERNAME = 'melikhov.dmitry.a'
+
 load_dotenv()
+dagshub.init(repo_name=REPO_NAME, repo_owner=USERNAME, mlflow=True)
+os.environ["HF_DAGSHUB_LOG_ARTIFACTS"]= "False"
 
 def train_model_from_config(config_path, config):
     set_random_seed(config["seed"])

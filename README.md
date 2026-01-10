@@ -61,3 +61,9 @@ sh scripts/run_tokenizer_train.sh
 ```
 sh scripts/run_model_train.sh
 ```
+
+# MLFlow
+
+Логи эксперимента лежат в DagsHub: https://dagshub.com/melikhov.dmitry.a/ellama-train/experiments
+
+Например: https://dagshub.com/melikhov.dmitry.a/ellama-train/experiments#/experiment/m_7978b647680e4765ac9ba4e0bd0be50f
