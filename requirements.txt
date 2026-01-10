@@ -13,3 +13,4 @@ dagshub
 tensorboard
 mlflow
 dagshub
+pytest
