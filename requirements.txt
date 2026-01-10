@@ -14,3 +14,6 @@ tensorboard
 mlflow
 dagshub
 pytest
+torchserve
+torch-model-archiver
+torch-workflow-archiver  

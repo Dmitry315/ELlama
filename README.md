@@ -62,6 +62,50 @@ sh scripts/run_tokenizer_train.sh
 sh scripts/run_model_train.sh
 ```
 
+# Serve
+
+## TorchServe
+
+Скачиваем модель локально:
+```
+from transformers import AutoModelForCausalLM, AutoTokenizer
+
+model_name = "dmitry315/ELlama1-0.7b"
+save_path = "data/model"
+
+tokenizer = AutoTokenizer.from_pretrained(model_name)
+model = AutoModelForCausalLM.from_pretrained(model_name)
+
+tokenizer.save_pretrained(save_path)
+model.save_pretrained(save_path)
+```
+
+Архивируем (`run_torch_archiver.sh`):
+```
+torch-model-archiver \
+  --model-name llm_text_generation \
+  --version 1.0 \
+  --handler llm_handler.py \
+  --extra-files "./data/model" \
+  --export-path model_store \
+  --force
+```
+
+Запускаем (`run_torchserve.sh`):
+```
+torchserve --start \
+  --model-store model_store \
+  --models ellama=llm_text_generation.mar \
+  --ncs
+```
+
+Делаем запрос:
+```
+curl -X POST http://localhost:8080/predictions/ellama \
+  -H "Content-Type: application/json" \
+  -d '{"data": "Θυμάμαι μια υπέροχη"}'
+```
+
 # MLFlow
 
 Логи эксперимента лежат в DagsHub: https://dagshub.com/melikhov.dmitry.a/ellama-train/experiments
