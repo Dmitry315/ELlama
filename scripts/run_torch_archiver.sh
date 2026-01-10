@@ -4,4 +4,5 @@ torch-model-archiver \
   --handler src/inference/handler.py \
   --extra-files "data/model" \
   --export-path model_store \
+  --requirements-file requirements.txt \
   --force

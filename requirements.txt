@@ -1,7 +1,6 @@
 torch
 transformers>=4.34.0
 datasets>=2.14.0
-peft>=0.5.0
 accelerate>=0.23.0
 bitsandbytes>=0.41.0
 trl>=0.7.1
@@ -13,7 +12,4 @@ dagshub
 tensorboard
 mlflow
 dagshub
-pytest
-torchserve
-torch-model-archiver
-torch-workflow-archiver  
+pytest 
