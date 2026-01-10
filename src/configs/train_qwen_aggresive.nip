@@ -11,11 +11,11 @@ trainer: !HFQwenTrainer
     attention_dropout: 0.0
     hidden_act: "silu"
     attention_bias: False
-  tokenizer_path: "src/experiments/example/bpe_greek_tokenizer"
+  tokenizer_path: "data/bpe_greek_tokenizer"
   tokenizer_truncation_side: "right"
   tokenizer_padding_side: "left"
   trainer_config_params:
-    output_dir: "src/experiments/results0.2B"
+    output_dir: "data/results"
     num_train_epochs: 1
     max_steps: -1
     per_device_train_batch_size: 1
@@ -44,13 +44,13 @@ trainer: !HFQwenTrainer
     completion_only_loss: False
     assistant_only_loss: False
     report_to: ["tensorboard"]
-    logging_dir: "src/experiments/runs/0.2B"
+    logging_dir: "data/runs/0.2B"
     seed: 42
   train_dataset: !get_pretrain_data
-    data_path: "src/experiments/example/data/fineweb2/train.jsonl"
+    data_path: "data/fineweb/train.jsonl"
   val_dataset: !get_pretrain_data
-    data_path: "src/experiments/example/data/fineweb2/val.jsonl"
-  save_path: "src/experiments/example/models/qwen_medium_pretrain"
+    data_path: "data/fineweb/val.jsonl"
+  save_path: "data/qwen_medium_pretrain"
   add_size_to_name: True
   resume_from_checkpoint: *checkpoint
   use_accelerate: False

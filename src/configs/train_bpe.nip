@@ -6,9 +6,9 @@ trainer: !HFBPETokenizerTrainer
     min_frequency: 2
     special_tokens: ["<|bos|>", "<|unk|>", "<|sep|>", "<|pad|>", "<|eos|>", "<|system|>", "<|user|>", "<|assistant|>"]
   train_corpus_files:
-    - "src/experiments/example/data/fineweb2/train.txt"
+    - "data/fineweb/train.txt"
   save_path:
-    local_path: "src/experiments/example/bpe_greek_tokenizer/"
+    local_path: "data/bpe_greek_tokenizer/"
   tokenizer_fast_params:
     padding_side: "left"
     truncation_side: "left"
