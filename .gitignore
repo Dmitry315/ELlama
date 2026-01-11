@@ -3,7 +3,7 @@
 **/logs/
 **/data
 .env
-**.dvc
+!.dvc
 **.out
 **.err
 **.log
