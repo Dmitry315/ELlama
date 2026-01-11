@@ -8,3 +8,4 @@
 **.err
 **.log
 /model_store/
+client_secret.json

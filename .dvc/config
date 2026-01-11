@@ -1,4 +1,4 @@
 [core]
-    remote = myremote
-['remote "myremote"']
-    url = gdrive://1f_HAV1tOsjRsAUUGnTpGvsNU77qnl7LS
+    remote = origin
+['remote "origin"']
+    url = https://dagshub.com/melikhov.dmitry.a/ELlama.dvc
