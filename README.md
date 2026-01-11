@@ -1,4 +1,4 @@
-# Ellama
+# ELlama
 
 Цель проекта - создать чат бот с нуля... на греческом языке.
 
@@ -8,7 +8,9 @@
 
 Скорость отклика модели: < 1000мс
 
-# Набор данных
+## ELlama v1
+
+https://huggingface.co/collections/dmitry315/ellama1
 
 ## Pretrain
 
