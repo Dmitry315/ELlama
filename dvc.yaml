@@ -1,6 +1,6 @@
 stages:
   prepare:
-    cmd: python src/data_pprocess/prepare_fineweb.py --save-path ./data/fineweb --to-txt --save-path-txt ./data/fineweb/train.txt
+    cmd: python src/data_process/prepare_fineweb.py --save-path ./data/fineweb --to-txt --save-path-txt ./data/fineweb/train.txt
     outs:
       - data/fineweb/train.jsonl
       - data/fineweb/val.jsonl
@@ -18,7 +18,6 @@ stages:
       - data/fineweb/val.jsonl
       - data/bpe_greek_tokenizer
     outs:
-      - data/qwen_medium_pretrain
+      - data/qwen_medium_pretrain0.2B
       - data/runs
       - data/results
-    

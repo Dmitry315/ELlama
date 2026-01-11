@@ -62,6 +62,12 @@ sh scripts/run_tokenizer_train.sh
 sh scripts/run_model_train.sh
 ```
 
+# DVC
+
+Использую dagshub:
+
+https://dagshub.com/melikhov.dmitry.a/ELlama
+
 # Serve
 
 В CI/CD некоторые библиотеки не влезли по памяти, поэтому в следующих частях пишется что нужно доустановить.
