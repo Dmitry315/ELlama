@@ -5,6 +5,9 @@ import pandas as pd
 logger = logging.getLogger(__name__)
 
 def read_fine_web(save_path="../experiments/data/fineweb2", dataset_name="dmitry315/fineweb2-modern-greece-sample"):
+    """
+    Read fineweb2 sample from hugging face and save locally
+    """
     logging.basicConfig(filename='prepare_fineweb_read_fine_web.log',
                         format='%(asctime)s - %(levelname)s - %(message)s',
                         level=logging.INFO,
@@ -17,6 +20,9 @@ def read_fine_web(save_path="../experiments/data/fineweb2", dataset_name="dmitry
     logger.info('Loaded to ' + save_path)
 
 def save_txt(read_path="../experiments/data/fineweb2/train.jsonl", save_path="../experiments/data/fineweb2/train.txt"):
+    """
+    Prepare fineweb2 train sample for BPE trainer
+    """
     logging.basicConfig(filename='prepare_fineweb_save_txt.log',
                         format='%(asctime)s - %(levelname)s - %(message)s',
                         level=logging.INFO,

@@ -8,6 +8,12 @@ from tokenizers.normalizers import NFD, StripAccents
 
 @nip
 class HFBPETokenizerTrainer:
+    """
+    BPE trainer class
+
+    Can be used in nip-config
+    """
+
     def __init__(self, 
                  bpe_init_params, 
                  bpe_trainer_params, 
@@ -28,11 +34,17 @@ class HFBPETokenizerTrainer:
         self.tokenizer_fast_params = tokenizer_fast_params
 
     def train(self):
+        """
+        Start HF training loop
+        """
         print('Start training')
         self.tokenizer.train(files=self.train_corpus_files, trainer=self.trainer)
         print('End training')
 
     def save(self):
+        """
+        Save tokenizer locally or on HF
+        """
         print('Save tokenizer')
         fast_tokenizer = PreTrainedTokenizerFast(tokenizer_object=self.tokenizer, **self.tokenizer_fast_params)
         hf_path = self.save_path.get("hub", None)

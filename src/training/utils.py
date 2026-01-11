@@ -6,7 +6,7 @@ from transformers import set_seed
 
 def set_random_seed(seed=42):
     """
-    Фиксирует random seed для всех библиотек
+    Fix random seed for everything
     """
     random.seed(seed)
     np.random.seed(seed)

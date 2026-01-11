@@ -6,11 +6,15 @@ from transformers import Qwen2ForCausalLM, PreTrainedTokenizerFast, Qwen2Config
 logger = logging.getLogger(__name__)
 
 def convert_fsdp_to_checkpoint(fsdp_checkpoint, output_model, tokenizer):
+    """
+    Convert FSDP distiduted checkpoint to safetensor
+
+    requires original parameters for config
+    """
     logging.basicConfig(filename='fsdp_checkpoint_to_safetensors.log',
                         format='%(asctime)s - %(levelname)s - %(message)s',
                         level=logging.INFO,
                         datefmt='%Y-%m-%d %H:%M:%S')
-    
     
     logger.info('Run parameters')
     logger.info(str(args))
@@ -61,4 +65,4 @@ if __name__ == '__main__':
     parser.add_argument("--tokenizer", type=str)
     args = parser.parse_args()
 
-    main(args.fsdp_checkpoint, args.output_model, args.tokenizer)
+    convert_fsdp_to_checkpoint(args.fsdp_checkpoint, args.output_model, args.tokenizer)

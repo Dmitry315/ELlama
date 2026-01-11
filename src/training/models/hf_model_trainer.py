@@ -6,6 +6,12 @@ from transformers import PreTrainedTokenizerFast, Qwen2ForCausalLM, Qwen2Config
 
 @nip
 class HFQwenTrainer:
+    """
+    HF LLM Trainer for Qwen
+
+    can be used in nip config
+    """
+
     def __init__(self, 
                  qwen_params, 
                  tokenizer_path, 
@@ -79,6 +85,9 @@ class HFQwenTrainer:
         print("Model trained")
 
     def save(self):
+        """
+        save model in fsdp or safetensor format
+        """
         if self.use_accelerate:
             print("Save fsdp model")
             self.trainer.accelerator.save_state(output_dir=self.save_path, safe_serialization=True)

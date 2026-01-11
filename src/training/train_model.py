@@ -20,6 +20,9 @@ dagshub.init(repo_name=REPO_NAME, repo_owner=USERNAME, mlflow=True)
 os.environ["HF_DAGSHUB_LOG_ARTIFACTS"]= "False"
 
 def train_model_from_config(config_path, config):
+    """
+    Run main loop from config
+    """
     set_random_seed(config["seed"])
     model_trainer = config["trainer"]
     model_trainer.train()
