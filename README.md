@@ -1,4 +1,4 @@
-# ElladaGPT
+# ELlama
 
 Цель проекта - создать чат бот с нуля... на греческом языке.
 
@@ -8,7 +8,9 @@
 
 Скорость отклика модели: < 1000мс
 
-# Набор данных
+## ELlama v1
+
+https://huggingface.co/collections/dmitry315/ellama1
 
 ## Pretrain
 
@@ -121,6 +123,10 @@ response = client.chat.completions.create(
 
 print(response.choices[0].message.content)
 ```
+
+Ещё есть возможность обернуть vllm serve в красивый web-ui:
+- https://github.com/open-webui/open-webui
+- https://docs.openwebui.com/getting-started/quick-start/starting-with-vllm
 
 ## TorchServe (тяжело + зачем?)
 
