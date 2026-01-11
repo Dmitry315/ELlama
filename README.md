@@ -142,6 +142,6 @@ curl -X POST http://localhost:8080/predictions/ellama \
 
 # MLFlow
 
-Логи эксперимента лежат в DagsHub: https://dagshub.com/melikhov.dmitry.a/ellama-train/experiments
+Логи эксперимента лежат в DagsHub: https://dagshub.com/melikhov.dmitry.a/ELlama/experiments
 
-Например: https://dagshub.com/melikhov.dmitry.a/ellama-train/experiments#/experiment/m_7978b647680e4765ac9ba4e0bd0be50f
+Например: https://dagshub.com/melikhov.dmitry.a/ELlama/experiments#/experiment/m_5f05459c5b854cee9c30cea1e1dbfdbc

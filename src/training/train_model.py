@@ -12,7 +12,7 @@ from .utils import set_random_seed
 from .models.hf_model_trainer import HFQwenTrainer
 from .datasets_loading.pretrain_data import get_pretrain_data
 
-REPO_NAME = 'ellama-train'
+REPO_NAME = 'ELlama'
 USERNAME = 'melikhov.dmitry.a'
 
 load_dotenv()
