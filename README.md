@@ -122,6 +122,10 @@ response = client.chat.completions.create(
 print(response.choices[0].message.content)
 ```
 
+Ещё есть возможность обернуть vllm serve в красивый web-ui:
+- https://github.com/open-webui/open-webui
+- https://docs.openwebui.com/getting-started/quick-start/starting-with-vllm
+
 ## TorchServe (тяжело + зачем?)
 
 Install:
