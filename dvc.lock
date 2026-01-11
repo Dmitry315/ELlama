@@ -1,0 +1,65 @@
+schema: '2.0'
+stages:
+  prepare:
+    cmd: python src/data_process/prepare_fineweb.py --save-path ./data/fineweb 
+      --to-txt --save-path-txt ./data/fineweb/train.txt
+    outs:
+    - path: data/fineweb/train.jsonl
+      hash: md5
+      md5: 4465b041b1c942a6c51f0f36c602899b
+      size: 2926315479
+    - path: data/fineweb/train.txt
+      hash: md5
+      md5: dd3f21437dcdc4ff47eff8873043ddda
+      size: 2684657518
+    - path: data/fineweb/val.jsonl
+      hash: md5
+      md5: aa34eda160d29ddfa617f406c3199e57
+      size: 10861089
+  train_tokenizer:
+    cmd: python -m src.training.train_tokenizer --config 
+      src/configs/train_bpe.nip
+    deps:
+    - path: data/fineweb/train.txt
+      hash: md5
+      md5: dd3f21437dcdc4ff47eff8873043ddda
+      size: 2684657518
+    outs:
+    - path: data/bpe_greek_tokenizer
+      hash: md5
+      md5: f6e43ac6e96d079d3f3f9d9d82439053.dir
+      size: 12576535
+      nfiles: 3
+  train_model:
+    cmd: python -m src.training.train_model --config 
+      src/configs/train_qwen_aggresive.nip
+    deps:
+    - path: data/bpe_greek_tokenizer
+      hash: md5
+      md5: f6e43ac6e96d079d3f3f9d9d82439053.dir
+      size: 12576535
+      nfiles: 3
+    - path: data/fineweb/train.jsonl
+      hash: md5
+      md5: 4465b041b1c942a6c51f0f36c602899b
+      size: 2926315479
+    - path: data/fineweb/val.jsonl
+      hash: md5
+      md5: aa34eda160d29ddfa617f406c3199e57
+      size: 10861089
+    outs:
+    - path: data/qwen_medium_pretrain0.2B
+      hash: md5
+      md5: 33af9be33f0f50fa45479794ef9191c0.dir
+      size: 935567317
+      nfiles: 6
+    - path: data/results
+      hash: md5
+      md5: 341c43cbe35780cde7baf66112aa96b7.dir
+      size: 2781824216
+      nfiles: 12
+    - path: data/runs
+      hash: md5
+      md5: 2ec2b4ce9ce8dbb77540448d3102336e.dir
+      size: 199690
+      nfiles: 1

@@ -17,7 +17,7 @@ trainer: !HFQwenTrainer
   trainer_config_params:
     output_dir: "data/results"
     num_train_epochs: 1
-    max_steps: 100000
+    max_steps: 5000
     per_device_train_batch_size: 1
     gradient_accumulation_steps: 1
     packing: False
@@ -38,7 +38,7 @@ trainer: !HFQwenTrainer
     group_by_length: False
     lr_scheduler_type: "cosine"
     eval_strategy: "steps"
-    eval_steps: 500
+    eval_steps: 1000
     max_length: 1024
     resume_from_checkpoint: &checkpoint False
     completion_only_loss: False
