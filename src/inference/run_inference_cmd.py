@@ -12,6 +12,9 @@ def load_safetensors_model_simple(model_path):
 
 
 if __name__ == "__main__":
+    """
+    Run inference in cmd
+    """
     logging.basicConfig(filename='run_inference_cmd.log',
                         format='%(asctime)s - %(levelname)s - %(message)s',
                         level=logging.INFO,

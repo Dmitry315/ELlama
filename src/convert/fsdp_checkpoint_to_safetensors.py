@@ -61,4 +61,4 @@ if __name__ == '__main__':
     parser.add_argument("--tokenizer", type=str)
     args = parser.parse_args()
 
-    main(args.fsdp_checkpoint, args.output_model, args.tokenizer)
+    convert_fsdp_to_checkpoint(args.fsdp_checkpoint, args.output_model, args.tokenizer)

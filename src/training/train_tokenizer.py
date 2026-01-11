@@ -13,6 +13,9 @@ from .models.hf_bpe_tokenizer import HFBPETokenizerTrainer
 load_dotenv()
 
 def train_tokenizer_from_config(config_path, config):
+    """
+    Run main loop from config
+    """
     set_random_seed(config["seed"])
     tokenizer_trainer = config["trainer"]
     tokenizer_trainer.train()

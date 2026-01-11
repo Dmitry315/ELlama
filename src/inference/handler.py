@@ -6,6 +6,10 @@ from transformers import AutoModelForCausalLM, AutoTokenizer
 logger = logging.getLogger(__name__)
 
 class LLMHandler:
+    """
+    Handler for torch serve
+    """
+
     def __init__(self):
         self.model = None
         self.tokenizer = None
@@ -13,7 +17,9 @@ class LLMHandler:
         self.initialized = False
         
     def initialize(self, context):
-        """Загрузка модели при старте"""
+        """
+        Init model weights
+        """
         properties = context.system_properties
         model_dir = properties.get("model_dir")
         
@@ -21,7 +27,6 @@ class LLMHandler:
         
         logger.info(f"Loading model from {model_dir}")
         
-        # Загрузка токенизатора и модели
         self.tokenizer = AutoTokenizer.from_pretrained(model_dir)
         self.model = AutoModelForCausalLM.from_pretrained(
             model_dir,
@@ -35,19 +40,19 @@ class LLMHandler:
         logger.info("Model loaded successfully")
         
     def preprocess(self, data):
-        """Подготовка входных данных"""
+        """
+        Prepare and tokenize texts
+        """
         text = data[0].get("body")
         
         if isinstance(text, (bytes, bytearray)):
             text = text.decode('utf-8')
-            
-        # Парсим JSON
+        
         try:
             text = json.loads(text)
         except:
             pass
-                
-        # Извлекаем prompt
+        
         if isinstance(text, dict):
             prompt = text.get("prompt", text.get("text", text.get("data", "")))
             self.max_length = text.get("max_length", 200)
@@ -60,8 +65,7 @@ class LLMHandler:
             self.top_p = 0.9
             
         logger.info(f"Processing prompt: {prompt[:100]}...")
-        
-        # Токенизация
+
         inputs = self.tokenizer(
             prompt, 
             return_tensors="pt",
@@ -73,7 +77,9 @@ class LLMHandler:
         return inputs
         
     def inference(self, inputs):
-        """Генерация текста"""
+        """
+        Generate completion
+        """
         inputs = {k: v.to(self.device) for k, v in inputs.items()}
         
         with torch.no_grad():
@@ -89,7 +95,9 @@ class LLMHandler:
         return outputs
         
     def postprocess(self, outputs):
-        """Декодирование результата"""
+        """
+        Decode completion
+        """
         generated_text = self.tokenizer.decode(
             outputs[0], 
             skip_special_tokens=True
@@ -100,7 +108,9 @@ class LLMHandler:
         return [generated_text]
         
     def handle(self, data, context):
-        """Главный метод обработки"""
+        """
+        Run Pipeline
+        """
         if not self.initialized:
             self.initialize(context)
         
@@ -109,7 +119,6 @@ class LLMHandler:
         return self.postprocess(outputs)
 
 
-# Для совместимости с TorchServe
 _service = LLMHandler()
 
 def handle(data, context):
