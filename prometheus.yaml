@@ -1,0 +1,8 @@
+global:
+  scrape_interval: 15s
+
+scrape_configs:
+  - job_name: 'vllm'
+    static_configs:
+      - targets: ['localhost:8000']  # или localhost:8080, в зависимости от того, где метрики
+    metrics_path: '/metrics'
