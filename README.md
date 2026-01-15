@@ -12,6 +12,65 @@
 
 https://huggingface.co/collections/dmitry315/ellama1
 
+### Latency (vllm becnh)
+
+Скрипт: `benchmark.sh`:
+```
+OPENAI_API_KEY="kek" \
+vllm bench serve \
+  --backend openai-chat \
+  --base-url http://localhost:8000 \
+  --endpoint /v1/chat/completions \
+  --model gpt2 \
+  --served-model-name ellama \
+  --dataset-name random \
+  --num-prompts 50 \
+  --random-input-len 128 \
+  --random-output-len 128 \
+  --request-rate 2 \
+  --percentile-metrics ttft,tpot,e2el \
+  --metric-percentiles 50,90,95,99 \
+  --ready-check-timeout-sec 30
+```
+
+Latency по квартилям для 50 запросов по 128 input 128 output токенов, request-rate = 2
+```
+============ Serving Benchmark Result ============
+Successful requests:                     50        
+Failed requests:                         0         
+Request rate configured (RPS):           2.00
+Benchmark duration (s):                  26.82     
+Total input tokens:                      6400      
+Total generated tokens:                  6400      
+Request throughput (req/s):              1.86      
+Output token throughput (tok/s):         238.63    
+Peak output token throughput (tok/s):    445.00    
+Peak concurrent requests:                9.00      
+Total token throughput (tok/s):          477.25    
+---------------Time to First Token----------------
+Mean TTFT (ms):                          33.56     
+Median TTFT (ms):                        32.79     
+P50 TTFT (ms):                           32.79     
+P90 TTFT (ms):                           40.30     
+P95 TTFT (ms):                           42.65     
+P99 TTFT (ms):                           44.92     
+-----Time per Output Token (excl. 1st token)------
+Mean TPOT (ms):                          14.82     
+Median TPOT (ms):                        14.21     
+P50 TPOT (ms):                           14.21     
+P90 TPOT (ms):                           16.26     
+P95 TPOT (ms):                           16.37     
+P99 TPOT (ms):                           16.57     
+----------------End-to-end Latency----------------
+Mean E2EL (ms):                          1915.41   
+Median E2EL (ms):                        1841.14   
+P50 E2EL (ms):                           1841.14   
+P90 E2EL (ms):                           2099.76   
+P95 E2EL (ms):                           2117.49   
+P99 E2EL (ms):                           2135.68   
+==================================================
+```
+
 ## Pretrain
 
 Для предобучения будут использоваться данные fineweb2 на греческом: 
